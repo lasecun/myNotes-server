@@ -6,10 +6,19 @@ plugins {
     kotlin("jvm") version "1.8.21"
     kotlin("plugin.serialization") version "1.8.21"
     id("io.ktor.plugin") version "2.3.1"
+    id("com.squareup.sqldelight") version "1.5.4"
 }
 
 group = "com.itram"
 version = "0.0.1"
+
+
+sqldelight {
+    database("AppDatabase"){
+        packageName = "com.itram.database"
+    }
+}
+
 application {
     mainClass.set("com.itram.ApplicationKt")
 
@@ -26,9 +35,9 @@ dependencies {
     implementation("io.ktor:ktor-server-netty-jvm:$ktor_version")
     implementation("io.ktor:ktor-server-content-negotiation:$ktor_version")
     implementation("io.ktor:ktor-serialization-kotlinx-json:$ktor_version")
+    implementation("com.squareup.sqldelight:sqlite-driver:1.5.4")
 
     implementation("ch.qos.logback:logback-classic:$logback_version")
-
 
     testImplementation("io.ktor:ktor-server-tests-jvm:$ktor_version")
     testImplementation("org.jetbrains.kotlin:kotlin-test-junit:$kotlin_version")
